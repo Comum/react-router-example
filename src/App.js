@@ -1,19 +1,27 @@
 import React from 'react';
-import { BrowserRouter as Router, Route } from 'react-router-dom';
+import {
+  BrowserRouter as Router,
+  Route,
+  NavLink
+} from 'react-router-dom';
 
-const Home = (props) => {
-  console.log(props);
-  return <h1>Home</h1>
-};
+import './App.css';
+
+const Links = () => (
+  <nav>
+    <NavLink exact activeClassName="active" to="/">Home</NavLink>
+    <NavLink exact activeClassName="active" to="/about">About</NavLink>
+    <NavLink exact activeClassName="active" to="/contact">Contact</NavLink>
+  </nav>
+);
 
 const App = () => (
   <Router>
     <div>
-      <Route exact path="/" component={Home} />
-      {/* <Route path="/about" render={() => <h1>About</h1> } /> */}
-      <Route
-        path="/about"
-        children={({match}) => match && <h1>About</h1> } />
+      <Links />
+      <Route exact path="/" render={() => <h1>Home</h1>} />
+      <Route path="/about" render={() => <h1>About</h1>} />
+      <Route path="/contact" render={() => <h1>Contact</h1>} />
     </div>
   </Router>
 );
