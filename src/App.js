@@ -7,11 +7,16 @@ import {
 
 import './App.css';
 
+const isActiveFunc = (match, location) => {
+  console.log(match, location);
+  return match
+}
+
 const Links = () => (
   <nav>
     <NavLink exact activeClassName="active" to="/">Home</NavLink>
-    <NavLink exact activeClassName="active" to="/about">About</NavLink>
-    <NavLink exact activeClassName="active" to="/contact">Contact</NavLink>
+    <NavLink isActive={isActiveFunc} activeClassName="active" to="/about">About</NavLink>
+    <NavLink isActive={isActiveFunc} activeClassName="active" to="/contact">Contact</NavLink>
   </nav>
 );
 
@@ -20,7 +25,12 @@ const App = () => (
     <div>
       <Links />
       <Route exact path="/" render={() => <h1>Home</h1>} />
-      <Route path="/about" render={() => <h1>About</h1>} />
+      <Route path="/about/:info?" render={(match) => (
+        <h1>
+          About<br />
+          Info: {match.match.params.info}
+        </h1>
+      )} />
       <Route path="/contact" render={() => <h1>Contact</h1>} />
     </div>
   </Router>
